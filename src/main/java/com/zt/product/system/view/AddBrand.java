@@ -1,8 +1,14 @@
 package com.zt.product.system.view;
 
+import com.zt.product.system.controller.MainController;
+import com.zt.product.system.model.Notification;
+
 public class AddBrand extends javax.swing.JFrame {
+    
+    private MainController controller = null;
 
     public AddBrand() {
+        controller = new MainController();
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -105,7 +111,15 @@ public class AddBrand extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddBrandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBrandActionPerformed
-        // TODO add your handling code here:
+        String name = txtBrandName.getText();
+        if (name != "") {
+            controller.addBrand(name);
+            Notification.showMessage("Marca agregada exitosamente", "Info", "Agregado exitoso");
+            this.dispose();
+            new BrandsMenu().setVisible(true);   
+        } else {
+            Notification.showMessage("No se pudo agregar la marca, nombre incompleto", "Error", "Agregado fallido");
+        }
     }//GEN-LAST:event_btnAddBrandActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

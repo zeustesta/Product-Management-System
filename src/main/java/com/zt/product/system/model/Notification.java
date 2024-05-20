@@ -11,8 +11,6 @@ public class Notification {
             optionPane.setMessageType(JOptionPane.INFORMATION_MESSAGE);
         } else if (type.equals("Error")) {
             optionPane.setMessageType(JOptionPane.ERROR_MESSAGE);
-        } else if (type.equals("Succeed")) {
-            optionPane.setMessageType(JOptionPane.OK_OPTION);
         }
         JDialog dialog = optionPane.createDialog(title);
         dialog.setAlwaysOnTop(true);

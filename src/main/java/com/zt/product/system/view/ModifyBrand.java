@@ -1,14 +1,18 @@
 package com.zt.product.system.view;
 
 import com.zt.product.system.controller.MainController;
+import com.zt.product.system.model.Brand;
+import com.zt.product.system.model.Notification;
 
 public class ModifyBrand extends javax.swing.JFrame {
 
     private MainController controller = null;
+    private Brand brand = new Brand();
     
-    public ModifyBrand() {
+    public ModifyBrand(int brandId) {
         controller = new MainController();
         initComponents();
+        getBrandData(brandId);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle("Editar Marca");
@@ -112,7 +116,16 @@ public class ModifyBrand extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditBrandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditBrandActionPerformed
-        // TODO add your handling code here:
+        String name = txtBrandName.getText();
+        
+        if (name != "") {
+            controller.modifyBrand(brand, name);
+            Notification.showMessage("Marca modificada correctamente", "Info", "Modificacion exitosa");
+            this.dispose();
+            new ProductsMenu().setVisible(true);   
+        } else {
+            Notification.showMessage("No se pudo modificar la marca, campo incompleto", "Error", "Modificacion fallida");
+        }
     }//GEN-LAST:event_btnEditBrandActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -129,4 +142,10 @@ public class ModifyBrand extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtBrandName;
     // End of variables declaration//GEN-END:variables
+
+    private void getBrandData(int brandId) {
+        this.brand = controller.getBrand(brandId);
+        
+        txtBrandName.setText(this.brand.getBrandName());
+    }
 }

@@ -1,6 +1,12 @@
 package com.zt.product.system.view;
 
 import com.zt.product.system.controller.MainController;
+import com.zt.product.system.model.Notification;
+import com.zt.product.system.model.Supplier;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class SuppliersMenu extends javax.swing.JFrame {
 
@@ -26,12 +32,17 @@ public class SuppliersMenu extends javax.swing.JFrame {
         btnGotoBrands = new javax.swing.JButton();
         btnGotoProducts = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProducts = new javax.swing.JTable();
+        tblSuppliers = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnEditSupplier = new javax.swing.JButton();
         btnDeleteSupplier = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -91,9 +102,10 @@ public class SuppliersMenu extends javax.swing.JFrame {
             }
         });
 
-        tblProducts.setBackground(new java.awt.Color(255, 255, 255));
-        tblProducts.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        tblProducts.setModel(new javax.swing.table.DefaultTableModel(
+        tblSuppliers.setBackground(new java.awt.Color(255, 255, 255));
+        tblSuppliers.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        tblSuppliers.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        tblSuppliers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -104,7 +116,7 @@ public class SuppliersMenu extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblProducts);
+        jScrollPane1.setViewportView(tblSuppliers);
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
@@ -115,11 +127,21 @@ public class SuppliersMenu extends javax.swing.JFrame {
         btnEditSupplier.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         btnEditSupplier.setForeground(new java.awt.Color(255, 255, 255));
         btnEditSupplier.setText("Editar proveedor");
+        btnEditSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditSupplierActionPerformed(evt);
+            }
+        });
 
         btnDeleteSupplier.setBackground(new java.awt.Color(102, 102, 102));
         btnDeleteSupplier.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         btnDeleteSupplier.setForeground(new java.awt.Color(255, 255, 255));
         btnDeleteSupplier.setText("Eliminar proveedor");
+        btnDeleteSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteSupplierActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -212,6 +234,41 @@ public class SuppliersMenu extends javax.swing.JFrame {
         new ProductsMenu().setVisible(true);
     }//GEN-LAST:event_btnGotoProductsActionPerformed
 
+    private void btnDeleteSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteSupplierActionPerformed
+        if (tblSuppliers.getRowCount() > 0) {
+            if (tblSuppliers.getSelectedRow() != -1) {
+                int supplierId = Integer.parseInt(String.valueOf(tblSuppliers.getValueAt(tblSuppliers.getSelectedRow(), 0)));
+                
+                controller.deleteSupplier(supplierId);
+                Notification.showMessage("Proveedor borrado correctamente", "Info", "Borrado exitoso");
+                populateTable();
+            } else {
+                Notification.showMessage("Se debe seleccionar una fila para poder borrar", "Error", "Borrado fallido");
+            }
+        } else {
+            Notification.showMessage("La tabla no contiene registros", "Error", "Borrado fallido");
+        }
+    }//GEN-LAST:event_btnDeleteSupplierActionPerformed
+
+    private void btnEditSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditSupplierActionPerformed
+        if (tblSuppliers.getRowCount() > 0) {
+            if (tblSuppliers.getSelectedRow() != -1) {
+                int supplierId = Integer.parseInt(String.valueOf(tblSuppliers.getValueAt(tblSuppliers.getSelectedRow(), 0)));
+                
+                new ModifyBrand(supplierId).setVisible(true);
+                
+            } else {
+                Notification.showMessage("Se debe seleccionar una fila para poder modificar", "Error", "Edicion fallida");
+            }
+        } else {
+            Notification.showMessage("La tabla no contiene registros", "Error", "Edicion fallida");
+        }
+    }//GEN-LAST:event_btnEditSupplierActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        populateTable();
+    }//GEN-LAST:event_formWindowOpened
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddSupplier;
     private javax.swing.JButton btnDeleteSupplier;
@@ -223,7 +280,38 @@ public class SuppliersMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblProducts;
+    private javax.swing.JTable tblSuppliers;
     private javax.swing.JTextField txtSupplier;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel tableModel = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            };
+        };
+        
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        
+        String[] titles = {"ID", "Nombre", "Telefono"};
+        
+        tableModel.setColumnIdentifiers(titles);
+        
+        List<Supplier> supplierList = controller.getSuppliers();
+        
+        if (supplierList != null) {
+            for (Supplier s : supplierList) {
+                Object[] object = {s.getSupplierId(), s.getSupplierName(), s.getSupplierPhone()};
+                tableModel.addRow(object);   
+            }
+        }
+        
+        tblSuppliers.setModel(tableModel);
+        
+        tblSuppliers.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tblSuppliers.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+        tblSuppliers.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+    }
 }

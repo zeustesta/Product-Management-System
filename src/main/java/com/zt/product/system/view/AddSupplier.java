@@ -1,6 +1,7 @@
 package com.zt.product.system.view;
 
 import com.zt.product.system.controller.MainController;
+import com.zt.product.system.model.Notification;
 
 public class AddSupplier extends javax.swing.JFrame {
     
@@ -40,6 +41,11 @@ public class AddSupplier extends javax.swing.JFrame {
         btnAddSupplier.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         btnAddSupplier.setForeground(new java.awt.Color(255, 255, 255));
         btnAddSupplier.setText("Agregar");
+        btnAddSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddSupplierActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
@@ -121,6 +127,19 @@ public class AddSupplier extends javax.swing.JFrame {
         this.dispose();
         new SuppliersMenu().setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnAddSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSupplierActionPerformed
+        String name = txtSupplierName.getText();
+        String phone = txtSupplierPhone.getText();
+        if ((name != "") && (phone != "")) {
+            controller.addSupplier(name, phone);
+            Notification.showMessage("Proveedor agregado exitosamente", "Succeed", "Agregado exitoso");
+            this.dispose();
+            new SuppliersMenu().setVisible(true);   
+        } else {
+            Notification.showMessage("No se pudo agregar el proveedor, campos incompletos", "Error", "Agregado fallido");
+        }
+    }//GEN-LAST:event_btnAddSupplierActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddSupplier;

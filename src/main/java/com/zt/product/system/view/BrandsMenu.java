@@ -1,6 +1,12 @@
 package com.zt.product.system.view;
 
 import com.zt.product.system.controller.MainController;
+import com.zt.product.system.model.Brand;
+import com.zt.product.system.model.Notification;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 public class BrandsMenu extends javax.swing.JFrame {
     
@@ -26,12 +32,17 @@ public class BrandsMenu extends javax.swing.JFrame {
         btnGotoSuppliers = new javax.swing.JButton();
         btnGotoProducts = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProducts = new javax.swing.JTable();
+        tblBrands = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnEditBrand = new javax.swing.JButton();
         btnDeleteBrand = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -91,9 +102,10 @@ public class BrandsMenu extends javax.swing.JFrame {
             }
         });
 
-        tblProducts.setBackground(new java.awt.Color(255, 255, 255));
-        tblProducts.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
-        tblProducts.setModel(new javax.swing.table.DefaultTableModel(
+        tblBrands.setBackground(new java.awt.Color(255, 255, 255));
+        tblBrands.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        tblBrands.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        tblBrands.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -104,7 +116,7 @@ public class BrandsMenu extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblProducts);
+        jScrollPane1.setViewportView(tblBrands);
 
         jLabel1.setBackground(new java.awt.Color(0, 0, 0));
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 24)); // NOI18N
@@ -115,11 +127,21 @@ public class BrandsMenu extends javax.swing.JFrame {
         btnEditBrand.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         btnEditBrand.setForeground(new java.awt.Color(255, 255, 255));
         btnEditBrand.setText("Editar marca");
+        btnEditBrand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditBrandActionPerformed(evt);
+            }
+        });
 
         btnDeleteBrand.setBackground(new java.awt.Color(102, 102, 102));
         btnDeleteBrand.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         btnDeleteBrand.setForeground(new java.awt.Color(255, 255, 255));
         btnDeleteBrand.setText("Eliminar marca");
+        btnDeleteBrand.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteBrandActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -212,6 +234,41 @@ public class BrandsMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBrandActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        populateTable();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btnDeleteBrandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteBrandActionPerformed
+        if (tblBrands.getRowCount() > 0) {
+            if (tblBrands.getSelectedRow() != -1) {
+                int brandId = Integer.parseInt(String.valueOf(tblBrands.getValueAt(tblBrands.getSelectedRow(), 0)));
+                
+                controller.deleteBrand(brandId);
+                Notification.showMessage("Marca borrada correctamente", "Info", "Borrado exitoso");
+                populateTable();
+            } else {
+                Notification.showMessage("Se debe seleccionar una fila para poder borrar", "Error", "Borrado fallido");
+            }
+        } else {
+            Notification.showMessage("La tabla no contiene registros", "Error", "Borrado fallido");
+        }
+    }//GEN-LAST:event_btnDeleteBrandActionPerformed
+
+    private void btnEditBrandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditBrandActionPerformed
+        if (tblBrands.getRowCount() > 0) {
+            if (tblBrands.getSelectedRow() != -1) {
+                int brandId = Integer.parseInt(String.valueOf(tblBrands.getValueAt(tblBrands.getSelectedRow(), 0)));
+                
+                new ModifyBrand(brandId).setVisible(true);
+                
+            } else {
+                Notification.showMessage("Se debe seleccionar una fila para poder modificar", "Error", "Edicion fallida");
+            }
+        } else {
+            Notification.showMessage("La tabla no contiene registros", "Error", "Edicion fallida");
+        }
+    }//GEN-LAST:event_btnEditBrandActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddBrand;
@@ -224,7 +281,37 @@ public class BrandsMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblProducts;
+    private javax.swing.JTable tblBrands;
     private javax.swing.JTextField txtBrand;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel tableModel = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            };
+        };
+        
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        
+        String[] titles = {"ID", "Nombre"};
+        
+        tableModel.setColumnIdentifiers(titles);
+        
+        List<Brand> brandList = controller.getBrands();
+        
+        if (brandList != null) {
+            for (Brand b : brandList) {
+                Object[] object = {b.getBrandId(), b.getBrandName()};
+                tableModel.addRow(object);   
+            }
+        }
+        
+        tblBrands.setModel(tableModel);
+        
+        tblBrands.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        tblBrands.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+    }
 }
