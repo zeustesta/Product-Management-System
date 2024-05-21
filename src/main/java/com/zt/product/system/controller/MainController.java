@@ -76,6 +76,10 @@ public class MainController {
         return persController.getSupplier(supplierId);
     }
     
+    public Supplier getSupplierByName(String supplierName) {
+        return persController.getSupplierByName(supplierName);
+    }
+    
     public List<Supplier> getSuppliers() {
         return persController.getSuppliers();
     }
@@ -118,6 +122,10 @@ public class MainController {
         return persController.getCategory(categoryId);
     }
     
+    public Category getCategoryByName(String categoryName) {
+        return persController.getCategoryByName(categoryName);
+    }
+    
     public List<Category> getCategories() {
         return persController.getCategories();
     }
@@ -137,6 +145,10 @@ public class MainController {
     
     public Brand getBrand(int brandId) {
         return persController.getBrand(brandId);
+    }
+    
+    public Brand getBrandByName(String brandName) {
+        return persController.getBrandByName(brandName);
     }
     
     public List<Brand> getBrands() {

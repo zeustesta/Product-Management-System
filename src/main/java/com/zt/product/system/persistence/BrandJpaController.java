@@ -9,6 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -94,6 +95,25 @@ public class BrandJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             return em.find(Brand.class, id);
+        } finally {
+            em.close();
+        }
+    }
+    
+    public Brand findBrandByName(String brandName) {
+        EntityManager em = getEntityManager();
+        
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Brand.class);
+            Root<Brand> brandRoot = cq.from(Brand.class);
+            
+            if (brandName != null) {
+                cq.where(em.getCriteriaBuilder().equal(brandRoot.get("BRANDNAME"), brandName));
+            }
+            
+            TypedQuery<Brand> queryResult = em.createQuery(cq);
+            
+            return queryResult.getSingleResult();
         } finally {
             em.close();
         }

@@ -352,18 +352,18 @@ public class AddProduct extends javax.swing.JFrame {
         initComoboxes();
         
         for (Supplier supplier : suppliers) {
-            bxProductSupplier1.addItem(supplier.getSupplierName() + " ID: " + supplier.getSupplierId());
-            bxProductSupplier2.addItem(supplier.getSupplierName() + " ID: " + supplier.getSupplierId());
-            bxProductSupplier3.addItem(supplier.getSupplierName() + " ID: " + supplier.getSupplierId());
-            bxProductSupplier4.addItem(supplier.getSupplierName() + " ID: " + supplier.getSupplierId());
+            bxProductSupplier1.addItem(supplier.getSupplierName());
+            bxProductSupplier2.addItem(supplier.getSupplierName());
+            bxProductSupplier3.addItem(supplier.getSupplierName());
+            bxProductSupplier4.addItem(supplier.getSupplierName());
         }
         
         for (Brand brand : brands) {
-            bxProductBrand.addItem(brand.getBrandName() + " ID: " + brand.getBrandId());
+            bxProductBrand.addItem(brand.getBrandName());
         }
         
         for (Category category : categories) {
-            bxProductCategory.addItem(category.getCategoryName() + " ID: " + category.getCategoryId());
+            bxProductCategory.addItem(category.getCategoryName());
         }
     }
     
@@ -383,48 +383,30 @@ public class AddProduct extends javax.swing.JFrame {
     }
     
     private Brand getSelectedBrand() {
-        return controller.getBrand(extractId(String.valueOf(bxProductBrand.getSelectedItem())));
+        return controller.getBrandByName(String.valueOf(bxProductBrand.getSelectedItem()));
     }
     
     private Category getSelectedCategory() {
-        return controller.getCategory(extractId(String.valueOf(bxProductBrand.getSelectedItem())));
+        return controller.getCategoryByName(String.valueOf(bxProductCategory.getSelectedItem()));
     }
     
     private ArrayList<Supplier> getSuppliersList() {
-        ArrayList<Integer> selectedSuppliersId = new ArrayList<>();
+        ArrayList<Supplier> selectedSuppliers = new ArrayList<>();
         
         if (bxProductSupplier1.getSelectedItem() != null) {
-            selectedSuppliersId.add(extractId(String.valueOf(bxProductSupplier1.getSelectedItem())));
+            selectedSuppliers.add(controller.getSupplierByName(String.valueOf(bxProductSupplier1.getSelectedItem())));
         }
         if (bxProductSupplier2.getSelectedItem() != null) {
-            selectedSuppliersId.add(extractId(String.valueOf(bxProductSupplier2.getSelectedItem())));
+            selectedSuppliers.add(controller.getSupplierByName(String.valueOf(bxProductSupplier2.getSelectedItem())));
         }
         if (bxProductSupplier3.getSelectedItem() != null) {
-            selectedSuppliersId.add(extractId(String.valueOf(bxProductSupplier3.getSelectedItem())));
+            selectedSuppliers.add(controller.getSupplierByName(String.valueOf(bxProductSupplier3.getSelectedItem())));
         }
         if (bxProductSupplier4.getSelectedItem() != null) {
-            selectedSuppliersId.add(extractId(String.valueOf(bxProductSupplier4.getSelectedItem())));
+            selectedSuppliers.add(controller.getSupplierByName(String.valueOf(bxProductSupplier4.getSelectedItem())));
         }
         
-        ArrayList<Supplier> suppliers = new ArrayList<>();
-        
-        for (int id : selectedSuppliersId) {
-            suppliers.add(controller.getSupplier(id));
-        }
-        
-        return suppliers;
-    }
-    
-    private Integer extractId(String comboboxText) {
-        String[] parts = comboboxText.split(" ID: ");
-        if (parts.length == 2) {
-            try {
-                return Integer.parseInt(parts[1]);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
+        return selectedSuppliers;
     }
     
     private boolean areFieldsValid(String name, float price, int stock, String descrip, Brand brand, ArrayList<Supplier> suppliers, Category category) {

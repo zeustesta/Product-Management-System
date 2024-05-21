@@ -95,6 +95,25 @@ public class SupplierJpaController implements Serializable{
             em.close();
         }
     }
+    
+    public Supplier findSupplierByName(String supplierName) {
+        EntityManager em = getEntityManager();
+        
+        try {
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery(Supplier.class);
+            Root<Supplier> supplierRoot = cq.from(Supplier.class);
+            
+            if (supplierName != null) {
+                cq.where(em.getCriteriaBuilder().equal(supplierRoot.get("SUPPLIERNAME"), supplierName));
+            }
+            
+            TypedQuery<Supplier> queryResult = em.createQuery(cq);
+            
+            return queryResult.getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
 
     public List<Supplier> findSupplierEntities() {
         return findSupplierEntities(true, -1, -1);

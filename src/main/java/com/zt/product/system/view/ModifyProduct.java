@@ -325,60 +325,42 @@ public class ModifyProduct extends javax.swing.JFrame {
         configureSuppliers(allSuppliers, this.product.getSuppliers());
         
         for (Brand brand : allBrands) {
-            bxProductBrand.addItem(brand.getBrandName() + " ID: " + brand.getBrandId());
+            bxProductBrand.addItem(brand.getBrandName());
         }
-        bxProductBrand.setSelectedItem(this.product.getBrand().getBrandName() + " ID: " + this.product.getBrand().getBrandId());
+        bxProductBrand.setSelectedItem(this.product.getBrand().getBrandName());
         
         for (Category category : allCategories) {
-            bxProductBrand.addItem(category.getCategoryName() + " ID: " + category.getCategoryId());
+            bxProductBrand.addItem(category.getCategoryName());
         }
-        bxProductCategory.setSelectedItem(this.product.getCategory().getCategoryName() + " ID: " + this.product.getCategory().getCategoryId());
+        bxProductCategory.setSelectedItem(this.product.getCategory().getCategoryName());
         
     }
     
     private Brand getSelectedBrand() {
-        return controller.getBrand(extractId(String.valueOf(bxProductBrand.getSelectedItem())));
+        return controller.getBrandByName(String.valueOf(bxProductBrand.getSelectedItem()));
     }
     
     private Category getSelectedCategory() {
-        return controller.getCategory(extractId(String.valueOf(bxProductBrand.getSelectedItem())));
+        return controller.getCategoryByName(String.valueOf(bxProductCategory.getSelectedItem()));
     }
     
     private ArrayList<Supplier> getSuppliersList() {
-        ArrayList<Integer> selectedSuppliersId = new ArrayList<>();
+        ArrayList<Supplier> selectedSuppliers = new ArrayList<>();
         
         if (bxProductSupplier1.getSelectedItem() != null) {
-            selectedSuppliersId.add(extractId(String.valueOf(bxProductSupplier1.getSelectedItem())));
+            selectedSuppliers.add(controller.getSupplierByName(String.valueOf(bxProductSupplier1.getSelectedItem())));
         }
         if (bxProductSupplier2.getSelectedItem() != null) {
-            selectedSuppliersId.add(extractId(String.valueOf(bxProductSupplier2.getSelectedItem())));
+            selectedSuppliers.add(controller.getSupplierByName(String.valueOf(bxProductSupplier2.getSelectedItem())));
         }
         if (bxProductSupplier3.getSelectedItem() != null) {
-            selectedSuppliersId.add(extractId(String.valueOf(bxProductSupplier3.getSelectedItem())));
+            selectedSuppliers.add(controller.getSupplierByName(String.valueOf(bxProductSupplier3.getSelectedItem())));
         }
         if (bxProductSupplier4.getSelectedItem() != null) {
-            selectedSuppliersId.add(extractId(String.valueOf(bxProductSupplier4.getSelectedItem())));
+            selectedSuppliers.add(controller.getSupplierByName(String.valueOf(bxProductSupplier4.getSelectedItem())));
         }
         
-        ArrayList<Supplier> suppliers = new ArrayList<>();
-        
-        for (int id : selectedSuppliersId) {
-            suppliers.add(controller.getSupplier(id));
-        }
-        
-        return suppliers;
-    }
-    
-    public Integer extractId(String comboboxText) {
-        String[] parts = comboboxText.split(" ID: ");
-        if (parts.length == 2) {
-            try {
-                return Integer.parseInt(parts[1]);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-        }
-        return null;
+        return selectedSuppliers;
     }
     
     public void configureSuppliers(List<Supplier> allSuppliers, List<Supplier> currentSuppliers) {
@@ -391,10 +373,10 @@ public class ModifyProduct extends javax.swing.JFrame {
     private void configureComboBox(JComboBox<String> comboBox, List<Supplier> allSuppliers, Supplier defaultSupplier) {
         comboBox.removeAllItems();
         if (defaultSupplier != null && !allSuppliers.contains(defaultSupplier)) {
-            comboBox.addItem(defaultSupplier.getSupplierName() + " ID: " + defaultSupplier.getSupplierId());
+            comboBox.addItem(defaultSupplier.getSupplierName());
         }
         for (Supplier supplier : allSuppliers) {
-            comboBox.addItem(supplier.getSupplierName() + " ID: " + supplier.getSupplierId());
+            comboBox.addItem(supplier.getSupplierName());
         }
         if (defaultSupplier != null) {
             comboBox.setSelectedItem(defaultSupplier.getSupplierName());

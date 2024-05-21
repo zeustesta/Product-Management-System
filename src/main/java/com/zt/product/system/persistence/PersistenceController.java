@@ -45,6 +45,10 @@ public class PersistenceController {
         return supplierJpa.findSupplier(supplierId);
     }
     
+    public Supplier getSupplierByName(String supplierName) {
+        return supplierJpa.findSupplierByName(supplierName);
+    }
+    
     public List<Supplier> getSuppliers() {
         return supplierJpa.findSupplierEntities();
     }
@@ -67,6 +71,10 @@ public class PersistenceController {
         return categoryJpa.findCategory(categoryId);
     }
     
+    public Category getCategoryByName(String categoryName) {
+        return categoryJpa.findCategoryByName(categoryName);
+    }
+    
     public List<Category> getCategories() {
         return categoryJpa.findCategoryEntities();
     }
@@ -79,6 +87,10 @@ public class PersistenceController {
     
     public Brand getBrand(int brandId) {
         return brandJpa.findBrand(brandId);
+    }
+    
+    public Brand getBrandByName(String brandName) {
+        return brandJpa.findBrandByName(brandName);
     }
     
     public List<Brand> getBrands() {
