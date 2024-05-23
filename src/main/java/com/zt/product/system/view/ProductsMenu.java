@@ -1,9 +1,12 @@
 package com.zt.product.system.view;
 
 import com.zt.product.system.controller.MainController;
+import com.zt.product.system.model.Brand;
 import com.zt.product.system.model.Notification;
 import com.zt.product.system.model.Product;
 import com.zt.product.system.model.Supplier;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -44,8 +47,10 @@ public class ProductsMenu extends javax.swing.JFrame {
         btnDeleteProduct = new javax.swing.JButton();
         btnEditProduct = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        bxFilterMethod = new javax.swing.JComboBox<>();
+        bxFilter = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         jMenuItem3.setText("jMenuItem3");
 
@@ -62,11 +67,6 @@ public class ProductsMenu extends javax.swing.JFrame {
         txtFilter.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtFilter.setForeground(new java.awt.Color(255, 255, 255));
         txtFilter.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtFilter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFilterActionPerformed(evt);
-            }
-        });
         txtFilter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtFilterKeyTyped(evt);
@@ -158,9 +158,17 @@ public class ProductsMenu extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Buscar por nombre:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bxFilterMethod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        bxFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel3.setFont(new java.awt.Font("Verdana", 2, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Metodo de filtrado:");
+
+        jLabel4.setFont(new java.awt.Font("Verdana", 2, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Filtro:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -177,49 +185,67 @@ public class ProductsMenu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnGotoSuppliers)
                         .addGap(18, 18, 18)
-                        .addComponent(btnGotoBrands))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(btnGotoBrands)))
                 .addGap(19, 19, 19))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(108, 108, 108)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 206, Short.MAX_VALUE)
-                        .addComponent(btnAddProduct)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEditProduct)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDeleteProduct)
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bxFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bxFilterMethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(107, 107, 107)
+                                .addComponent(jLabel2)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(76, 76, 76)
+                                .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                                .addComponent(btnAddProduct)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEditProduct)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDeleteProduct)
+                                .addGap(18, 18, 18))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addComponent(jLabel2)
-                .addGap(5, 5, 5)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAddProduct)
-                    .addComponent(btnEditProduct)
-                    .addComponent(btnDeleteProduct)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAddProduct)
+                            .addComponent(btnEditProduct)
+                            .addComponent(btnDeleteProduct)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(bxFilterMethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(bxFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel4))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnExit)
@@ -242,10 +268,6 @@ public class ProductsMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFilterActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFilterActionPerformed
-
     private void btnGotoBrandsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGotoBrandsActionPerformed
         this.dispose();
         new BrandsMenu().setVisible(true);
@@ -267,6 +289,7 @@ public class ProductsMenu extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         populateTable();
+        initComboboxes();
     }//GEN-LAST:event_formWindowOpened
 
     private void btnDeleteProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProductActionPerformed
@@ -317,10 +340,12 @@ public class ProductsMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnGotoBrands;
     private javax.swing.JButton btnGotoSuppliers;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> bxFilter;
+    private javax.swing.JComboBox<String> bxFilterMethod;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -339,7 +364,7 @@ public class ProductsMenu extends javax.swing.JFrame {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         
-        String[] titles = {"Nombre", "Descripcion", "Marca", "Stock", "Precio", "Proveedores", "Categoria"};
+        String[] titles = {"ID", "Nombre", "Descripcion", "Marca", "Stock", "Precio", "Proveedores", "Categoria"};
         
         tableModel.setColumnIdentifiers(titles);
         
@@ -348,8 +373,8 @@ public class ProductsMenu extends javax.swing.JFrame {
         if (productList != null) {
             for (Product p : productList) {
                 if (p.isActive()) {
-                    Object[] object = {p.getProductName(), p.getProductDescrip(), p.getBrand().getBrandName(), p.getProductStock(), 
-                                       p.getProductPrice(), getSuppliersName(p.getSuppliers()), p.getCategory().getCategoryName()
+                    Object[] object = {p.getProductId(), p.getProductName(), p.getProductDescrip(), p.getBrand().getBrandName(), p.getProductStock(), 
+                                       p.getProductPrice(), getSuppliersNames(p.getSuppliers()), p.getCategory().getCategoryName()
                     };
                     tableModel.addRow(object);   
                 }
@@ -368,18 +393,120 @@ public class ProductsMenu extends javax.swing.JFrame {
         tblProducts.getColumnModel().getColumn(7).setCellRenderer(centerRenderer);
     }
     
-    private List<String> getSuppliersName(List<Supplier> suppliers) {
-        List<String> names = new ArrayList<>();
-        
-        for (Supplier s : suppliers) {
-            names.add(s.getSupplierName());
+    private void populateTable(String filterMethod, String filterValue) {
+        DefaultTableModel tableModel = (DefaultTableModel) tblProducts.getModel();
+        tableModel.setRowCount(0);
+
+        List<Product> filteredProducts = filterProducts(filterMethod, filterValue);
+
+        for (Product p : filteredProducts) {
+            Object[] object = {p.getProductId(), p.getProductName(), p.getProductDescrip(), p.getBrand().getBrandName(), p.getProductStock(), 
+                               p.getProductPrice(), getSuppliersNames(p.getSuppliers()), p.getCategory().getCategoryName()
+            };
+            tableModel.addRow(object);  
         }
         
-        return names;
+        tblProducts.setModel(tableModel);
+    }
+    
+    private void initComboboxes() {
+        bxFilter.removeAllItems();
+        bxFilterMethod.removeAllItems();
+
+        bxFilter.addItem(null);
+        bxFilter.setEnabled(false);
+
+        bxFilterMethod.addItem(null);
+
+        bxFilterMethod.addItem("Marca");
+        bxFilterMethod.addItem("Proveedor");
+
+        bxFilterMethod.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedMethod = (String) bxFilterMethod.getSelectedItem();
+                populateFilterComboBox(selectedMethod);
+            }
+        });
+        
+        /* bxFilter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedMethod = (String) bxFilterMethod.getSelectedItem();
+                String filterValue = (String) bxFilter.getSelectedItem();
+                populateTable(selectedMethod, filterValue);
+            }
+        }); */
+    }
+
+    private void populateFilterComboBox(String selectedMethod) {
+        System.out.println(selectedMethod);
+        bxFilter.setEnabled(true);
+        bxFilter.removeAllItems();
+        bxFilter.addItem(null); 
+
+        switch (selectedMethod) {
+            case "Marca":
+                List<Brand> brands = new ArrayList<>();
+                for (Brand b : brands) {
+                    System.out.println(b.getBrandName());
+                    bxFilter.addItem(b.getBrandName());
+                }
+                break;
+            case "Proveedor":
+                List<Supplier> suppliers = new ArrayList<>();
+                for (Supplier s : suppliers) {
+                    System.out.println(s.getSupplierName());
+                    bxFilter.addItem(s.getSupplierName());
+                }
+                break;
+            default:
+                
+        }
+        
+    }
+    
+    private List<Product> filterProducts(String filterMethod, String filterValue) {
+        List<Product> allProducts = controller.getProducts();
+        List<Product> filteredProducts = new ArrayList<>();
+
+        switch (filterMethod) {
+            case "Marca":
+                for (Product p : allProducts) {
+                    if (p.getBrand().getBrandName() == filterValue) {
+                        filteredProducts.add(p);
+                    }
+                }
+                break;
+            case "Proveedor":
+                for (Product p : allProducts) {
+                    String suppliersNames = getSuppliersNames(p.getSuppliers());
+                    if (suppliersNames.contains(filterValue)) {
+                        filteredProducts.add(p);
+                    }
+                }
+                break;
+            default:
+                filteredProducts = allProducts;
+                break;
+        }
+
+        return filteredProducts;
     }
     
     private void filterByName() {
-        int tableColumn = 0;
+        int tableColumn = 1;
         filter.setRowFilter(RowFilter.regexFilter(txtFilter.getText(), tableColumn));
     }
+
+    private String getSuppliersNames(List<Supplier> suppliers) {
+        StringBuilder namesBuilder = new StringBuilder();
+        for (Supplier s : suppliers) {
+            if (namesBuilder.length() > 0) {
+                namesBuilder.append(" - ");
+            }
+            namesBuilder.append(s.getSupplierName());
+        }
+        return namesBuilder.toString();
+    }    
 }
