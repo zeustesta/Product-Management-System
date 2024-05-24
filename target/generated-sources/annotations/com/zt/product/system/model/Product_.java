@@ -8,14 +8,14 @@ import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-05-23T21:19:25", comments="EclipseLink-2.7.12.v20230209-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-05-24T13:52:13", comments="EclipseLink-2.7.12.v20230209-rNA")
 @StaticMetamodel(Product.class)
 public class Product_ { 
 
+    public static volatile SingularAttribute<Product, String> productModel;
     public static volatile SingularAttribute<Product, Integer> productId;
     public static volatile ListAttribute<Product, Supplier> suppliers;
     public static volatile SingularAttribute<Product, Integer> productStock;
-    public static volatile SingularAttribute<Product, Boolean> active;
     public static volatile SingularAttribute<Product, String> productDescrip;
     public static volatile SingularAttribute<Product, Category> category;
     public static volatile SingularAttribute<Product, Brand> brand;

@@ -14,8 +14,8 @@ public class MainController {
     
     /******  PRODUCT  *****/
 
-    public void addProduct(String name, int stock, float price, ArrayList<Supplier> suppliers, Brand brand, String descrip, Category category) {
-        Product newProduct = new Product(name, descrip, stock, brand, price, suppliers, category);
+    public void addProduct(String name, String model, int stock, float price, ArrayList<Supplier> suppliers, Brand brand, String descrip, Category category) {
+        Product newProduct = new Product(name, model, descrip, stock, brand, price, suppliers, category);
         
         try {
             persController.addProduct(newProduct);
@@ -33,9 +33,10 @@ public class MainController {
         return persController.getProducts();
     }
     
-    public void modifyProduct(Product product, String name, int stock, float price, ArrayList<Supplier> suppliers, Brand brand, String descrip, Category category) {
+    public void modifyProduct(Product product, String name, String model, int stock, float price, ArrayList<Supplier> suppliers, Brand brand, String descrip, Category category) {
         try {
             product.setProductName(name);
+            product.setProductModel(model);
             product.setProductStock(stock);
             product.setProductPrice(price);
             product.setProductDescrip(descrip);

@@ -21,9 +21,9 @@ com\zt\product\system\view\ProductsMenu$2.class
 com\zt\product\system\view\BrandsMenu$8.class
 com\zt\product\system\ProductSystem.class
 com\zt\product\system\view\ModifyBrand.class
+com\zt\product\system\view\BrandsMenu$10.class
 com\zt\product\system\view\ModifyProduct$2.class
 com\zt\product\system\model\Product.class
-com\zt\product\system\view\AddProduct$6.class
 com\zt\product\system\model\Brand.class
 com\zt\product\system\view\ModifySupplier$2.class
 com\zt\product\system\view\SuppliersMenu$1.class
@@ -48,6 +48,7 @@ com\zt\product\system\model\Product_.class
 com\zt\product\system\persistence\BrandJpaController.class
 com\zt\product\system\view\AddProduct.class
 com\zt\product\system\view\SuppliersMenu$9.class
+com\zt\product\system\view\SuppliersMenu$10.class
 com\zt\product\system\view\SuppliersMenu$6.class
 com\zt\product\system\view\ProductsMenu$10.class
 com\zt\product\system\view\ProductsMenu$6.class
@@ -55,16 +56,15 @@ com\zt\product\system\view\SuppliersMenu.class
 com\zt\product\system\model\Notification.class
 com\zt\product\system\view\AddBrand$2.class
 com\zt\product\system\model\Category.class
+com\zt\product\system\view\ProductsMenu$14.class
 com\zt\product\system\view\AddProduct$4.class
 com\zt\product\system\view\BrandsMenu$6.class
 com\zt\product\system\view\SuppliersMenu$3.class
-com\zt\product\system\view\ModifyProduct$3.class
 com\zt\product\system\view\AddProduct$1.class
 com\zt\product\system\view\BrandsMenu$3.class
 com\zt\product\system\view\BrandsMenu.class
 com\zt\product\system\view\AddSupplier$1.class
 com\zt\product\system\view\ProductsMenu$7.class
-com\zt\product\system\view\ModifyProduct$4.class
 com\zt\product\system\view\SuppliersMenu$5.class
 com\zt\product\system\view\ProductsMenu$9.class
 com\zt\product\system\persistence\exceptions\IllegalOrphanException.class
@@ -73,7 +73,7 @@ com\zt\product\system\view\ModifyProduct$1.class
 com\zt\product\system\view\ModifyBrand$2.class
 com\zt\product\system\model\Brand_.class
 com\zt\product\system\view\SuppliersMenu$2.class
+com\zt\product\system\view\ProductsMenu$13.class
 com\zt\product\system\view\ProductsMenu$3.class
 com\zt\product\system\view\BrandsMenu$7.class
-com\zt\product\system\view\AddProduct$5.class
 com\zt\product\system\view\ModifySupplier.class

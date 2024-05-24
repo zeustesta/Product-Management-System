@@ -36,7 +36,7 @@ public class ProductsMenu extends javax.swing.JFrame {
 
         jMenuItem3 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
-        txtFilter = new javax.swing.JTextField();
+        txtNameFilter = new javax.swing.JTextField();
         btnAddProduct = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
         btnGotoSuppliers = new javax.swing.JButton();
@@ -51,6 +51,8 @@ public class ProductsMenu extends javax.swing.JFrame {
         bxFilter = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        txtModelFilter = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         jMenuItem3.setText("jMenuItem3");
 
@@ -63,13 +65,13 @@ public class ProductsMenu extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        txtFilter.setBackground(new java.awt.Color(51, 51, 51));
-        txtFilter.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        txtFilter.setForeground(new java.awt.Color(255, 255, 255));
-        txtFilter.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtFilter.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtNameFilter.setBackground(new java.awt.Color(51, 51, 51));
+        txtNameFilter.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        txtNameFilter.setForeground(new java.awt.Color(255, 255, 255));
+        txtNameFilter.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtNameFilter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtFilterKeyTyped(evt);
+                txtNameFilterKeyTyped(evt);
             }
         });
 
@@ -170,26 +172,38 @@ public class ProductsMenu extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Filtro:");
 
+        txtModelFilter.setBackground(new java.awt.Color(51, 51, 51));
+        txtModelFilter.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        txtModelFilter.setForeground(new java.awt.Color(255, 255, 255));
+        txtModelFilter.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtModelFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtModelFilterActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Verdana", 2, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Buscar por modelo:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(btnExit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnGotoSuppliers)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnGotoBrands)))
-                .addGap(19, 19, 19))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(btnExit)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnGotoSuppliers)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnGotoBrands)))
+                        .addGap(19, 19, 19))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -208,11 +222,15 @@ public class ProductsMenu extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(107, 107, 107)
                                 .addComponent(jLabel2)
+                                .addGap(51, 51, 51)
+                                .addComponent(jLabel5)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(76, 76, 76)
-                                .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 178, Short.MAX_VALUE)
+                                .addComponent(txtNameFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtModelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnAddProduct)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnEditProduct)
@@ -237,20 +255,22 @@ public class ProductsMenu extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(bxFilterMethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(bxFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtNameFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtModelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel4))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnExit)
                     .addComponent(btnGotoSuppliers)
-                    .addComponent(btnGotoBrands))
+                    .addComponent(btnGotoBrands)
+                    .addComponent(btnExit))
                 .addGap(22, 22, 22))
         );
 
@@ -321,17 +341,29 @@ public class ProductsMenu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditProductActionPerformed
 
-    private void txtFilterKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFilterKeyTyped
-        txtFilter.addKeyListener(new KeyAdapter() {
+    private void txtNameFilterKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNameFilterKeyTyped
+        txtNameFilter.addKeyListener(new KeyAdapter() {
             public void keyReleased(final KeyEvent e) {
-                String string = txtFilter.getText();
-                txtFilter.setText(string);
+                String string = txtNameFilter.getText();
+                txtNameFilter.setText(string);
                 filterByName();
             }
         });
         filter = new TableRowSorter(tblProducts.getModel());
         tblProducts.setRowSorter(filter);
-    }//GEN-LAST:event_txtFilterKeyTyped
+    }//GEN-LAST:event_txtNameFilterKeyTyped
+
+    private void txtModelFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModelFilterActionPerformed
+        txtModelFilter.addKeyListener(new KeyAdapter() {
+            public void keyReleased(final KeyEvent e) {
+                String string = txtModelFilter.getText();
+                txtModelFilter.setText(string);
+                filterByModel();
+            }
+        });
+        filter = new TableRowSorter(tblProducts.getModel());
+        tblProducts.setRowSorter(filter);
+    }//GEN-LAST:event_txtModelFilterActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduct;
@@ -346,11 +378,13 @@ public class ProductsMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProducts;
-    private javax.swing.JTextField txtFilter;
+    private javax.swing.JTextField txtModelFilter;
+    private javax.swing.JTextField txtNameFilter;
     // End of variables declaration//GEN-END:variables
 
     private void populateTable() {
@@ -364,7 +398,7 @@ public class ProductsMenu extends javax.swing.JFrame {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         
-        String[] titles = {"ID", "Nombre", "Descripcion", "Marca", "Stock", "Precio", "Proveedores", "Categoria"};
+        String[] titles = {"ID", "Nombre", "Modelo", "Descripcion", "Marca", "Stock", "Precio", "Proveedores", "Categoria"};
         
         tableModel.setColumnIdentifiers(titles);
         
@@ -372,12 +406,10 @@ public class ProductsMenu extends javax.swing.JFrame {
         
         if (productList != null) {
             for (Product p : productList) {
-                if (p.isActive()) {
-                    Object[] object = {p.getProductId(), p.getProductName(), p.getProductDescrip(), p.getBrand().getBrandName(), p.getProductStock(), 
-                                       p.getProductPrice(), getSuppliersNames(p.getSuppliers()), p.getCategory().getCategoryName()
-                    };
-                    tableModel.addRow(object);   
-                }
+                Object[] object = {p.getProductId(), p.getProductName(), p.getProductModel(), p.getProductDescrip(), p.getBrand().getBrandName(), 
+                                   p.getProductStock(), p.getProductPrice(), getSuppliersNames(p.getSuppliers()), p.getCategory().getCategoryName()
+                };
+                tableModel.addRow(object);   
             }
         }
         
@@ -391,6 +423,8 @@ public class ProductsMenu extends javax.swing.JFrame {
         tblProducts.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
         tblProducts.getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
         tblProducts.getColumnModel().getColumn(7).setCellRenderer(centerRenderer);
+        tblProducts.getColumnModel().getColumn(8).setCellRenderer(centerRenderer);
+        
     }
     
     private void populateTable(String filterMethod, String filterValue) {
@@ -400,8 +434,8 @@ public class ProductsMenu extends javax.swing.JFrame {
         List<Product> filteredProducts = filterProducts(filterMethod, filterValue);
 
         for (Product p : filteredProducts) {
-            Object[] object = {p.getProductId(), p.getProductName(), p.getProductDescrip(), p.getBrand().getBrandName(), p.getProductStock(), 
-                               p.getProductPrice(), getSuppliersNames(p.getSuppliers()), p.getCategory().getCategoryName()
+            Object[] object = {p.getProductId(), p.getProductName(), p.getProductModel(), p.getProductDescrip(), p.getBrand().getBrandName(), 
+                               p.getProductStock(), p.getProductPrice(), getSuppliersNames(p.getSuppliers()), p.getCategory().getCategoryName()
             };
             tableModel.addRow(object);  
         }
@@ -463,14 +497,12 @@ public class ProductsMenu extends javax.swing.JFrame {
     }
     
     private List<Product> filterProducts(String filterMethod, String filterValue) {
-        System.out.println("Metodo: " + filterMethod + " Valor: " + filterValue);
         List<Product> allProducts = controller.getProducts();
         List<Product> filteredProducts = new ArrayList<>();
         
         if (filterValue != null && filterMethod != null) {
             switch (filterMethod) {
                 case "Marca":
-                    System.out.println("Case marca");
                     for (Product p : allProducts) {
                         if (p.getBrand().getBrandName() == filterValue) {
                             filteredProducts.add(p);
@@ -478,7 +510,6 @@ public class ProductsMenu extends javax.swing.JFrame {
                     }
                     break;
                 case "Proveedor":
-                    System.out.println("Case proveedor");
                     for (Product p : allProducts) {
                         String suppliersNames = getSuppliersNames(p.getSuppliers());
                         if (suppliersNames.contains(filterValue)) {
@@ -495,7 +526,12 @@ public class ProductsMenu extends javax.swing.JFrame {
     
     private void filterByName() {
         int tableColumn = 1;
-        filter.setRowFilter(RowFilter.regexFilter(txtFilter.getText(), tableColumn));
+        filter.setRowFilter(RowFilter.regexFilter(txtNameFilter.getText(), tableColumn));
+    }
+    
+    private void filterByModel() {
+        int tableColumn = 2;
+        filter.setRowFilter(RowFilter.regexFilter(txtModelFilter.getText(), tableColumn));
     }
 
     private String getSuppliersNames(List<Supplier> suppliers) {

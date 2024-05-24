@@ -16,6 +16,7 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int productId;
     private String productName;
+    private String productModel;
     private String productDescrip;
     private int productStock;
     @OneToOne
@@ -25,20 +26,19 @@ public class Product implements Serializable {
     private float productPrice;
     @OneToMany
     private List<Supplier> suppliers;
-    private boolean active; 
 
     public Product() {
     }
     
-    public Product(String name, String descrip, int stock, Brand brand, float price, ArrayList<Supplier> suppliers, Category category) {
+    public Product(String name, String model, String descrip, int stock, Brand brand, float price, ArrayList<Supplier> suppliers, Category category) {
         this.productName = name;
+        this.productModel = model;
         this.productDescrip = descrip;
         this.productStock = stock;
         this.brand = brand;
         this.productPrice = price;
         this.suppliers = suppliers;
         this.category = category;
-        this.active = true;
     }
 
     public int getProductId() {
@@ -55,6 +55,14 @@ public class Product implements Serializable {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public String getProductModel() {
+        return productModel;
+    }
+
+    public void setProductModel(String productModel) {
+        this.productModel = productModel;
     }
 
     public String getProductDescrip() {
@@ -95,14 +103,6 @@ public class Product implements Serializable {
 
     public void setSuppliers(List<Supplier> suppliers) {
         this.suppliers = suppliers;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     public Category getCategory() {
