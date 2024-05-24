@@ -429,68 +429,67 @@ public class ProductsMenu extends javax.swing.JFrame {
             }
         });
         
-        /* bxFilter.addActionListener(new ActionListener() {
+        bxFilter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selectedMethod = (String) bxFilterMethod.getSelectedItem();
                 String filterValue = (String) bxFilter.getSelectedItem();
                 populateTable(selectedMethod, filterValue);
             }
-        }); */
+        }); 
     }
 
     private void populateFilterComboBox(String selectedMethod) {
-        System.out.println(selectedMethod);
         bxFilter.setEnabled(true);
         bxFilter.removeAllItems();
         bxFilter.addItem(null); 
-
-        switch (selectedMethod) {
-            case "Marca":
-                List<Brand> brands = new ArrayList<>();
-                for (Brand b : brands) {
-                    System.out.println(b.getBrandName());
-                    bxFilter.addItem(b.getBrandName());
-                }
-                break;
-            case "Proveedor":
-                List<Supplier> suppliers = new ArrayList<>();
-                for (Supplier s : suppliers) {
-                    System.out.println(s.getSupplierName());
-                    bxFilter.addItem(s.getSupplierName());
-                }
-                break;
-            default:
-                
-        }
         
+        if (selectedMethod != null) {
+            switch (selectedMethod) {
+                case "Marca":
+                    List<Brand> brands = controller.getBrands();
+                    for (Brand b : brands) {
+                        bxFilter.addItem(b.getBrandName());
+                    }
+                    break;
+                case "Proveedor":
+                    List<Supplier> suppliers = controller.getSuppliers();
+                    for (Supplier s : suppliers) {
+                        bxFilter.addItem(s.getSupplierName());
+                    }
+                    break;
+            }
+        }
     }
     
     private List<Product> filterProducts(String filterMethod, String filterValue) {
+        System.out.println("Metodo: " + filterMethod + " Valor: " + filterValue);
         List<Product> allProducts = controller.getProducts();
         List<Product> filteredProducts = new ArrayList<>();
-
-        switch (filterMethod) {
-            case "Marca":
-                for (Product p : allProducts) {
-                    if (p.getBrand().getBrandName() == filterValue) {
-                        filteredProducts.add(p);
+        
+        if (filterValue != null && filterMethod != null) {
+            switch (filterMethod) {
+                case "Marca":
+                    System.out.println("Case marca");
+                    for (Product p : allProducts) {
+                        if (p.getBrand().getBrandName() == filterValue) {
+                            filteredProducts.add(p);
+                        }
                     }
-                }
-                break;
-            case "Proveedor":
-                for (Product p : allProducts) {
-                    String suppliersNames = getSuppliersNames(p.getSuppliers());
-                    if (suppliersNames.contains(filterValue)) {
-                        filteredProducts.add(p);
+                    break;
+                case "Proveedor":
+                    System.out.println("Case proveedor");
+                    for (Product p : allProducts) {
+                        String suppliersNames = getSuppliersNames(p.getSuppliers());
+                        if (suppliersNames.contains(filterValue)) {
+                            filteredProducts.add(p);
+                        }
                     }
-                }
-                break;
-            default:
-                filteredProducts = allProducts;
-                break;
+                    break;
+            }
+        } else {
+            filteredProducts = allProducts;
         }
-
         return filteredProducts;
     }
     

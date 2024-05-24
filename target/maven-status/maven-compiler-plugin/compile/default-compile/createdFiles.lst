@@ -10,6 +10,7 @@ com\zt\product\system\view\BrandsMenu$1.class
 com\zt\product\system\view\ModifySupplier$1.class
 com\zt\product\system\view\SuppliersMenu$8.class
 com\zt\product\system\persistence\PersistenceController.class
+com\zt\product\system\view\ProductsMenu$12.class
 com\zt\product\system\view\Start$2.class
 com\zt\product\system\view\ProductsMenu.class
 com\zt\product\system\model\Category_.class
