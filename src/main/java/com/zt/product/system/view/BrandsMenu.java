@@ -274,6 +274,7 @@ public class BrandsMenu extends javax.swing.JFrame {
             if (tblBrands.getSelectedRow() != -1) {
                 int brandId = Integer.parseInt(String.valueOf(tblBrands.getValueAt(tblBrands.getSelectedRow(), 0)));
                 
+                this.dispose();
                 new ModifyBrand(brandId).setVisible(true);
                 
             } else {

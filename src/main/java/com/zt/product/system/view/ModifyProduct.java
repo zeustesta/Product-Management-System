@@ -7,8 +7,11 @@ import com.zt.product.system.model.Notification;
 import com.zt.product.system.model.Product;
 import com.zt.product.system.model.Supplier;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 public class ModifyProduct extends javax.swing.JFrame {
 
@@ -18,11 +21,11 @@ public class ModifyProduct extends javax.swing.JFrame {
     public ModifyProduct(int productId) {
         controller = new MainController();
         initComponents();
-        getProductData(productId);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setTitle("Editar Producto");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        getProductData(productId);
     }
 
     @SuppressWarnings("unchecked")
@@ -268,7 +271,7 @@ public class ModifyProduct extends javax.swing.JFrame {
             this.dispose();
             new ProductsMenu().setVisible(true);   
         } else {
-            Notification.showMessage("No se pudo modificar el producto, campos incompletos", "Error", "Modificacion fallida");
+            Notification.showMessage("Algo salio mal", "Error", "Modificacion fallida");
         }
     }//GEN-LAST:event_btnEditProductActionPerformed
 
@@ -305,7 +308,22 @@ public class ModifyProduct extends javax.swing.JFrame {
     private javax.swing.JTextField txtProductStock;
     // End of variables declaration//GEN-END:variables
 
+    private void initComboboxes() {
+        bxProductBrand.removeAllItems();
+        bxProductCategory.removeAllItems();
+        bxProductSupplier1.removeAllItems();
+        bxProductSupplier2.removeAllItems();
+        bxProductSupplier3.removeAllItems();
+        bxProductSupplier4.removeAllItems();
+        
+        bxProductSupplier1.addItem(null);
+        bxProductSupplier2.addItem(null);
+        bxProductSupplier3.addItem(null);
+        bxProductSupplier4.addItem(null);
+    }
+    
     private void getProductData(int productId) {
+        initComboboxes();
         this.product = controller.getProduct(productId);
         List<Supplier> allSuppliers = controller.getSuppliers();
         List<Brand> allBrands = controller.getBrands();
@@ -314,7 +332,7 @@ public class ModifyProduct extends javax.swing.JFrame {
         txtProductName.setText(this.product.getProductName());
         txtProductModel.setText(this.product.getProductModel());
         txtProductDescription.setText(this.product.getProductDescrip());
-        txtProductPrice.setText(String.valueOf((char) this.product.getProductPrice()));
+        txtProductPrice.setText(String.valueOf(this.product.getProductPrice()));
         txtProductStock.setText(String.valueOf(this.product.getProductStock()));
         
         configureSuppliers(allSuppliers, this.product.getSuppliers());
@@ -325,7 +343,7 @@ public class ModifyProduct extends javax.swing.JFrame {
         bxProductBrand.setSelectedItem(this.product.getBrand().getBrandName());
         
         for (Category category : allCategories) {
-            bxProductBrand.addItem(category.getCategoryName());
+            bxProductCategory.addItem(category.getCategoryName());
         }
         bxProductCategory.setSelectedItem(this.product.getCategory().getCategoryName());
         
@@ -340,41 +358,65 @@ public class ModifyProduct extends javax.swing.JFrame {
     }
     
     private ArrayList<Supplier> getSuppliersList() {
-        ArrayList<Supplier> selectedSuppliers = new ArrayList<>();
-        
-        if (bxProductSupplier1.getSelectedItem() != null) {
-            selectedSuppliers.add(controller.getSupplierByName(String.valueOf(bxProductSupplier1.getSelectedItem())));
+    ArrayList<Supplier> selectedSuppliers = new ArrayList<>();
+        Set<String> selectedSupplierNames = new HashSet<>();
+    
+    String supplierName1 = (String) bxProductSupplier1.getSelectedItem();
+    if (supplierName1 != null) {
+        if (!selectedSupplierNames.add(supplierName1)) {
+            JOptionPane.showMessageDialog(null, "El proveedor " + supplierName1 + " ya ha sido seleccionado.", "Error", JOptionPane.ERROR_MESSAGE);
+            return new ArrayList<>();
         }
-        if (bxProductSupplier2.getSelectedItem() != null) {
-            selectedSuppliers.add(controller.getSupplierByName(String.valueOf(bxProductSupplier2.getSelectedItem())));
-        }
-        if (bxProductSupplier3.getSelectedItem() != null) {
-            selectedSuppliers.add(controller.getSupplierByName(String.valueOf(bxProductSupplier3.getSelectedItem())));
-        }
-        if (bxProductSupplier4.getSelectedItem() != null) {
-            selectedSuppliers.add(controller.getSupplierByName(String.valueOf(bxProductSupplier4.getSelectedItem())));
-        }
-        
-        return selectedSuppliers;
+        selectedSuppliers.add(controller.getSupplierByName(supplierName1));
     }
+
+    String supplierName2 = (String) bxProductSupplier2.getSelectedItem();
+    if (supplierName2 != null) {
+        if (!selectedSupplierNames.add(supplierName2)) {
+            JOptionPane.showMessageDialog(null, "El proveedor " + supplierName2 + " ya ha sido seleccionado.", "Error", JOptionPane.ERROR_MESSAGE);
+            return new ArrayList<>();
+        }
+        selectedSuppliers.add(controller.getSupplierByName(supplierName2));
+    }
+
+    String supplierName3 = (String) bxProductSupplier3.getSelectedItem();
+    if (supplierName3 != null) {
+        if (!selectedSupplierNames.add(supplierName3)) {
+            JOptionPane.showMessageDialog(null, "El proveedor " + supplierName3 + " ya ha sido seleccionado.", "Error", JOptionPane.ERROR_MESSAGE);
+            return new ArrayList<>();
+        }
+        selectedSuppliers.add(controller.getSupplierByName(supplierName3));
+    }
+
+    String supplierName4 = (String) bxProductSupplier4.getSelectedItem();
+    if (supplierName4 != null) {
+        if (!selectedSupplierNames.add(supplierName4)) {
+            JOptionPane.showMessageDialog(null, "El proveedor " + supplierName4 + " ya ha sido seleccionado.", "Error", JOptionPane.ERROR_MESSAGE);
+            return new ArrayList<>();
+        }
+        selectedSuppliers.add(controller.getSupplierByName(supplierName4));
+    }
+    
+    return selectedSuppliers;
+}
     
     public void configureSuppliers(List<Supplier> allSuppliers, List<Supplier> currentSuppliers) {
-        configureComboBox(bxProductSupplier1, allSuppliers, currentSuppliers.size() > 0 ? currentSuppliers.get(0) : null);
-        configureComboBox(bxProductSupplier2, allSuppliers, currentSuppliers.size() > 1 ? currentSuppliers.get(1) : null);
-        configureComboBox(bxProductSupplier3, allSuppliers, currentSuppliers.size() > 2 ? currentSuppliers.get(2) : null);
-        configureComboBox(bxProductSupplier4, allSuppliers, currentSuppliers.size() > 3 ? currentSuppliers.get(3) : null);
+        JComboBox<String>[] comboBoxes = new JComboBox[]{bxProductSupplier1, bxProductSupplier2, bxProductSupplier3, bxProductSupplier4};
+        
+        for (int i = 0; i < comboBoxes.length; i++) {
+            configureCombobox(comboBoxes[i], allSuppliers, i < currentSuppliers.size() ? currentSuppliers.get(i) : null);
+        }
     }
     
-    private void configureComboBox(JComboBox<String> comboBox, List<Supplier> allSuppliers, Supplier defaultSupplier) {
-        comboBox.removeAllItems();
-        if (defaultSupplier != null && !allSuppliers.contains(defaultSupplier)) {
-            comboBox.addItem(defaultSupplier.getSupplierName());
-        }
+    private void configureCombobox(JComboBox<String> comboBox, List<Supplier> allSuppliers, Supplier defaultSupplier) {
+        
         for (Supplier supplier : allSuppliers) {
             comboBox.addItem(supplier.getSupplierName());
         }
         if (defaultSupplier != null) {
             comboBox.setSelectedItem(defaultSupplier.getSupplierName());
+        } else {
+            comboBox.setSelectedItem(null);
         }
     }
     

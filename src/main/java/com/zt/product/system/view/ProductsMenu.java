@@ -53,6 +53,7 @@ public class ProductsMenu extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtModelFilter = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        btnGotoModifyPrices = new javax.swing.JButton();
 
         jMenuItem3.setText("jMenuItem3");
 
@@ -176,15 +177,25 @@ public class ProductsMenu extends javax.swing.JFrame {
         txtModelFilter.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         txtModelFilter.setForeground(new java.awt.Color(255, 255, 255));
         txtModelFilter.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtModelFilter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtModelFilterActionPerformed(evt);
+        txtModelFilter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtModelFilterKeyTyped(evt);
             }
         });
 
         jLabel5.setFont(new java.awt.Font("Verdana", 2, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Buscar por modelo:");
+
+        btnGotoModifyPrices.setBackground(new java.awt.Color(102, 102, 102));
+        btnGotoModifyPrices.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        btnGotoModifyPrices.setForeground(new java.awt.Color(255, 255, 255));
+        btnGotoModifyPrices.setText("Modificar precio");
+        btnGotoModifyPrices.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGotoModifyPricesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -194,15 +205,7 @@ public class ProductsMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(btnExit)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnGotoSuppliers)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnGotoBrands)))
+                        .addComponent(jScrollPane1)
                         .addGap(19, 19, 19))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -236,7 +239,16 @@ public class ProductsMenu extends javax.swing.JFrame {
                                 .addComponent(btnEditProduct)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnDeleteProduct)
-                                .addGap(18, 18, 18))))))
+                                .addGap(18, 18, 18))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnExit)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGotoModifyPrices)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGotoSuppliers)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGotoBrands)
+                        .addGap(18, 18, 18))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,13 +263,17 @@ public class ProductsMenu extends javax.swing.JFrame {
                             .addComponent(btnEditProduct)
                             .addComponent(btnDeleteProduct)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(bxFilterMethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel5)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(bxFilterMethod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(9, 9, 9)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(bxFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -265,13 +281,14 @@ public class ProductsMenu extends javax.swing.JFrame {
                                 .addComponent(txtModelFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel4))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnExit)
+                    .addComponent(btnGotoModifyPrices)
                     .addComponent(btnGotoSuppliers)
-                    .addComponent(btnGotoBrands)
-                    .addComponent(btnExit))
-                .addGap(22, 22, 22))
+                    .addComponent(btnGotoBrands))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -332,6 +349,7 @@ public class ProductsMenu extends javax.swing.JFrame {
         if (tblProducts.getRowCount() > 0) {
             if (tblProducts.getSelectedRow() != -1) {
                 int productId = Integer.parseInt(String.valueOf(tblProducts.getValueAt(tblProducts.getSelectedRow(), 0)));
+                this.dispose();
                 new ModifyProduct(productId).setVisible(true);
             } else {
                 Notification.showMessage("Se debe seleccionar una fila para poder modificar", "Error", "Edicion fallida");
@@ -353,7 +371,16 @@ public class ProductsMenu extends javax.swing.JFrame {
         tblProducts.setRowSorter(filter);
     }//GEN-LAST:event_txtNameFilterKeyTyped
 
-    private void txtModelFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtModelFilterActionPerformed
+    private void btnGotoModifyPricesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGotoModifyPricesActionPerformed
+        if (tblProducts.getRowCount() > 0) {
+            this.dispose();
+            new ModifyPrices().setVisible(true);
+        } else {
+            Notification.showMessage("La tabla no contiene registros", "Error", "Modificacion fallida");
+        }
+    }//GEN-LAST:event_btnGotoModifyPricesActionPerformed
+
+    private void txtModelFilterKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtModelFilterKeyTyped
         txtModelFilter.addKeyListener(new KeyAdapter() {
             public void keyReleased(final KeyEvent e) {
                 String string = txtModelFilter.getText();
@@ -363,7 +390,7 @@ public class ProductsMenu extends javax.swing.JFrame {
         });
         filter = new TableRowSorter(tblProducts.getModel());
         tblProducts.setRowSorter(filter);
-    }//GEN-LAST:event_txtModelFilterActionPerformed
+    }//GEN-LAST:event_txtModelFilterKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddProduct;
@@ -371,6 +398,7 @@ public class ProductsMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnEditProduct;
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnGotoBrands;
+    private javax.swing.JButton btnGotoModifyPrices;
     private javax.swing.JButton btnGotoSuppliers;
     private javax.swing.JComboBox<String> bxFilter;
     private javax.swing.JComboBox<String> bxFilterMethod;

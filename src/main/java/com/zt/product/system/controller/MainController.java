@@ -51,6 +51,10 @@ public class MainController {
         }
     }
     
+    public void modifyPrices(String operation, String type, String typeSelection, int percent) {
+        persController.modifyPrices(operation, type, typeSelection, percent);
+    }
+    
     public void deleteProduct(int productId) {
         try {
             persController.deleteProduct(productId);

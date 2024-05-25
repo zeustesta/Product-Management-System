@@ -108,7 +108,7 @@ public class BrandJpaController implements Serializable {
             Root<Brand> brandRoot = cq.from(Brand.class);
             
             if (brandName != null) {
-                cq.where(em.getCriteriaBuilder().equal(brandRoot.get("BRANDNAME"), brandName));
+                cq.where(em.getCriteriaBuilder().equal(brandRoot.get("brandName"), brandName));
             }
             
             TypedQuery<Brand> queryResult = em.createQuery(cq);

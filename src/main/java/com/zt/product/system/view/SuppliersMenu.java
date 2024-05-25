@@ -241,8 +241,8 @@ public class SuppliersMenu extends javax.swing.JFrame {
             if (tblSuppliers.getSelectedRow() != -1) {
                 int supplierId = Integer.parseInt(String.valueOf(tblSuppliers.getValueAt(tblSuppliers.getSelectedRow(), 0)));
 
+                this.dispose();
                 new ModifyBrand(supplierId).setVisible(true);
-
             } else {
                 Notification.showMessage("Se debe seleccionar una fila para poder modificar", "Error", "Edicion fallida");
             }

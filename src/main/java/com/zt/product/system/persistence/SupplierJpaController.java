@@ -104,7 +104,7 @@ public class SupplierJpaController implements Serializable{
             Root<Supplier> supplierRoot = cq.from(Supplier.class);
             
             if (supplierName != null) {
-                cq.where(em.getCriteriaBuilder().equal(supplierRoot.get("SUPPLIERNAME"), supplierName));
+                cq.where(em.getCriteriaBuilder().equal(supplierRoot.get("supplierName"), supplierName));
             }
             
             TypedQuery<Supplier> queryResult = em.createQuery(cq);

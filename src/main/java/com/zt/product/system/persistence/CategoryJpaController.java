@@ -102,7 +102,7 @@ public class CategoryJpaController implements Serializable {
             Root<Category> categoryRoot = cq.from(Category.class);
             
             if (categoryName != null) {
-                cq.where(em.getCriteriaBuilder().equal(categoryRoot.get("CATEGORYNAME"), categoryName));
+                cq.where(em.getCriteriaBuilder().equal(categoryRoot.get("categoryName"), categoryName));
             }
             
             TypedQuery<Category> queryResult = em.createQuery(cq);

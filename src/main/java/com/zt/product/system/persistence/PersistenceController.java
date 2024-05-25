@@ -31,6 +31,10 @@ public class PersistenceController {
         productJpa.edit(product);
     }
     
+    public void modifyPrices(String operation, String type, String typeSelection, int percent) {
+        productJpa.modifyPrices(operation, type, typeSelection, percent);
+    }
+    
     public void deleteProduct(int productId) throws Exception {
         productJpa.destroy(productId);
     }

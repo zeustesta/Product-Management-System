@@ -1,12 +1,16 @@
 package com.zt.product.system.persistence;
 
 import com.zt.product.system.model.Product;
+import com.zt.product.system.model.Supplier;
 import com.zt.product.system.persistence.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.persistence.criteria.Subquery;
 
 public class ProductJpaController implements Serializable{
     
@@ -125,6 +129,54 @@ public class ProductJpaController implements Serializable{
         } finally {
             em.close();
         }
+    }
+    
+    
+    public void modifyPrices(String operation, String type, String typeSelection, int percent) {
+        EntityManager em = getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Product> cq = cb.createQuery(Product.class);
+            Root<Product> product = cq.from(Product.class);
+
+            Predicate predicate;
+            if ("Marca".equalsIgnoreCase(type)) {
+                predicate = cb.equal(product.get("brand").get("brandName"), typeSelection);
+            } else if ("Proveedor".equalsIgnoreCase(type)) {
+                Subquery<Long> subquery = cq.subquery(Long.class);
+                Root<Product> subProduct = subquery.from(Product.class);
+                subquery.select(subProduct.get("productId"))
+                        .where(cb.equal(subProduct.join("suppliers").get("supplierName"), typeSelection));
+                predicate = product.get("productId").in(subquery);
+            } else {
+                throw new IllegalArgumentException("Tipo no válido");
+            }
+
+            cq.select(product).where(predicate);
+            List<Product> products = em.createQuery(cq).getResultList();
+
+            for (Product p : products) {
+                if ("Incremento".equalsIgnoreCase(operation)) {
+                    p.setProductPrice((float) (p.getProductPrice() * (1 + (percent / 100.0))));
+                } else if ("Decremento".equalsIgnoreCase(operation)) {
+                    p.setProductPrice((float) (p.getProductPrice() * (1 - (percent / 100.0))));
+                } else {
+                    throw new IllegalArgumentException("Operación no válida");
+                }
+                em.merge(p);
+            }
+
+            transaction.commit();
+        } catch (RuntimeException e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw e;
+        }
+    
     }
 }
 
