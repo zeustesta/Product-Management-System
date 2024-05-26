@@ -1,6 +1,7 @@
 package com.zt.product.system.view;
 
 import com.zt.product.system.controller.MainController;
+import java.awt.Toolkit;
 
 public class Start extends javax.swing.JFrame {
     
@@ -90,7 +91,7 @@ public class Start extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/logo.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -162,7 +163,7 @@ public class Start extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
-
+    
     private void checkCategories() {
         if (controller.countCategories() == 0) {
             controller.addCategory("Pesca");
@@ -170,4 +171,5 @@ public class Start extends javax.swing.JFrame {
             controller.addCategory("Playa");
         }
     }
+
 }
