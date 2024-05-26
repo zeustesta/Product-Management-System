@@ -54,9 +54,9 @@ public class BrandsMenu extends javax.swing.JFrame {
         txtBrand.setBackground(new java.awt.Color(51, 51, 51));
         txtBrand.setForeground(new java.awt.Color(255, 255, 255));
         txtBrand.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtBrand.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBrandActionPerformed(evt);
+        txtBrand.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBrandKeyTyped(evt);
             }
         });
 
@@ -237,18 +237,6 @@ public class BrandsMenu extends javax.swing.JFrame {
         new ProductsMenu().setVisible(true);
     }//GEN-LAST:event_btnGotoProductsActionPerformed
 
-    private void txtBrandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBrandActionPerformed
-        txtBrand.addKeyListener(new KeyAdapter() {
-            public void KeyReleased(final KeyEvent e) {
-                String string = txtBrand.getText();
-                txtBrand.setText(string);
-                filterBrand();
-            }
-        });
-        filter = new TableRowSorter(tblBrands.getModel());
-        tblBrands.setRowSorter(filter);
-    }//GEN-LAST:event_txtBrandActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         populateTable();
     }//GEN-LAST:event_formWindowOpened
@@ -284,6 +272,18 @@ public class BrandsMenu extends javax.swing.JFrame {
             Notification.showMessage("La tabla no contiene registros", "Error", "Edicion fallida");
         }
     }//GEN-LAST:event_btnEditBrandActionPerformed
+
+    private void txtBrandKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBrandKeyTyped
+        txtBrand.addKeyListener(new KeyAdapter() {
+            public void keyReleased(final KeyEvent e) {
+                String string = txtBrand.getText();
+                txtBrand.setText(string);
+                filterBrand();
+            }
+        });
+        filter = new TableRowSorter(tblBrands.getModel());
+        tblBrands.setRowSorter(filter);
+    }//GEN-LAST:event_txtBrandKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -43,7 +43,6 @@ public class SuppliersMenu extends javax.swing.JFrame {
         tblSuppliers = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1180, 583));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -59,9 +58,9 @@ public class SuppliersMenu extends javax.swing.JFrame {
         txtSupplier.setBackground(new java.awt.Color(51, 51, 51));
         txtSupplier.setForeground(new java.awt.Color(255, 255, 255));
         txtSupplier.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtSupplier.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSupplierActionPerformed(evt);
+        txtSupplier.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSupplierKeyTyped(evt);
             }
         });
 
@@ -270,9 +269,9 @@ public class SuppliersMenu extends javax.swing.JFrame {
         new AddSupplier().setVisible(true);
     }//GEN-LAST:event_btnAddSupplierActionPerformed
 
-    private void txtSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSupplierActionPerformed
+    private void txtSupplierKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSupplierKeyTyped
         txtSupplier.addKeyListener(new KeyAdapter() {
-            private void KeyReleased(final KeyEvent e) {
+            public void keyReleased(final KeyEvent e) {
                 String string = txtSupplier.getText();
                 txtSupplier.setText(string);
                 filterSupplier();
@@ -280,7 +279,7 @@ public class SuppliersMenu extends javax.swing.JFrame {
         });
         filter = new TableRowSorter(tblSuppliers.getModel());
         tblSuppliers.setRowSorter(filter);
-    }//GEN-LAST:event_txtSupplierActionPerformed
+    }//GEN-LAST:event_txtSupplierKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddSupplier;

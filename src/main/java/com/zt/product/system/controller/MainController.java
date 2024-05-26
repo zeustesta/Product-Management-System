@@ -64,6 +64,15 @@ public class MainController {
         }
     }
     
+    public boolean isNumeric(String number) {
+        try {
+            Integer.parseInt(number);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    
     /***** SUPPLIER *****/
     
     public void addSupplier(String name, String phone) {

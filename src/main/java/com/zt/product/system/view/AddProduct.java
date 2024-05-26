@@ -287,7 +287,7 @@ public class AddProduct extends javax.swing.JFrame {
             Brand brand = getSelectedBrand();
             Category category = getSelectedCategory();
             
-            if (areFieldsValid(name, price, stock, brand, suppliers, category)) {
+            if (areFieldsValid(name, price, brand, suppliers, category)) {
                 controller.addProduct(name, model, stock, price, suppliers, brand, descrip, category);
                 Notification.showMessage("Producto agregado exitosamente", "Info", "Agregado exitoso");
                 this.dispose();
@@ -412,8 +412,8 @@ public class AddProduct extends javax.swing.JFrame {
         return selectedSuppliers;
     }
     
-    private boolean areFieldsValid(String name, float price, int stock, Brand brand, ArrayList<Supplier> suppliers, Category category) {
-        if ((name == "") || (price == 0) || (stock == 0) || (brand == null) || (category == null) || (suppliers.size() == 0)) {
+    private boolean areFieldsValid(String name, float price, Brand brand, ArrayList<Supplier> suppliers, Category category) {
+        if ((name == "") || (price == 0) || (brand == null) || (category == null) || (suppliers.size() == 0)) {
             return false;
         }
         

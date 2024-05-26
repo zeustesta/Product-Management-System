@@ -190,6 +190,8 @@ public class ModifyPrices extends javax.swing.JFrame {
         if (areFieldsValid(type, typeSelection, operation, percent)) {
             controller.modifyPrices(operation, type, typeSelection, percent);
             Notification.showMessage("Precios modificados correctamente", "Info", "Modificacion exitosa");
+            this.dispose();
+            new ProductsMenu().setVisible(true);
         } else {
             Notification.showMessage("Algo salio mal", "Error", "Modificacion fallida");
         }

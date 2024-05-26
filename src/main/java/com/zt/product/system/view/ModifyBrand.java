@@ -122,7 +122,7 @@ public class ModifyBrand extends javax.swing.JFrame {
             controller.modifyBrand(brand, name);
             Notification.showMessage("Marca modificada correctamente", "Info", "Modificacion exitosa");
             this.dispose();
-            new ProductsMenu().setVisible(true);   
+            new BrandsMenu().setVisible(true);   
         } else {
             Notification.showMessage("No se pudo modificar la marca, campo incompleto", "Error", "Modificacion fallida");
         }
