@@ -98,6 +98,10 @@ public class MainController {
         return persController.getSuppliers();
     }
     
+    public int countSuppliers() {
+        return persController.countSuppliers();
+    }
+    
     public void modifySupplier(Supplier supplier, String name, String phone) {
         try {
             supplier.setSupplierName(name);
@@ -144,6 +148,10 @@ public class MainController {
         return persController.getCategories();
     }
     
+    public int countCategories() {
+        return persController.countCategories();
+    }
+    
     /***** BRAND *****/
     
     public void addBrand(String name) {
@@ -167,6 +175,10 @@ public class MainController {
     
     public List<Brand> getBrands() {
         return persController.getBrands();
+    }
+    
+    public int countBrands() {
+        return persController.countBrands();
     }
  
     public void modifyBrand(Brand brand, String name) {

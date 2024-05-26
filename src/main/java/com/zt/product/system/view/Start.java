@@ -1,10 +1,13 @@
 package com.zt.product.system.view;
 
-import java.awt.Dimension;
+import com.zt.product.system.controller.MainController;
 
 public class Start extends javax.swing.JFrame {
+    
+    private MainController controller = null;
 
     public Start() {
+        controller = new MainController();
         initComponents();
         this.setTitle("Inicio");
         this.setResizable(false);
@@ -25,6 +28,11 @@ public class Start extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 204));
 
@@ -82,7 +90,7 @@ public class Start extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/META-INF/logo.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -140,6 +148,10 @@ public class Start extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        checkCategories();
+    }//GEN-LAST:event_formWindowOpened
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
@@ -150,4 +162,12 @@ public class Start extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
+
+    private void checkCategories() {
+        if (controller.countCategories() == 0) {
+            controller.addCategory("Pesca");
+            controller.addCategory("Camping");
+            controller.addCategory("Playa");
+        }
+    }
 }

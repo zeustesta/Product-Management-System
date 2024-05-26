@@ -311,8 +311,12 @@ public class ProductsMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGotoBrandsActionPerformed
                                        
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
-        this.dispose();
-        new AddProduct().setVisible(true);
+        if (checkSuppliersAndBrands()) {
+            this.dispose();
+            new AddProduct().setVisible(true);
+        } else {
+            Notification.showMessage("Debe existir al menos un proveedor y una marca en el sistema.", "Error", "Agregado fallido");
+        }
     }//GEN-LAST:event_btnAddProductActionPerformed
 
     private void btnGotoSuppliersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGotoSuppliersActionPerformed
@@ -572,4 +576,12 @@ public class ProductsMenu extends javax.swing.JFrame {
         }
         return namesBuilder.toString();
     }    
+
+    private boolean checkSuppliersAndBrands() {
+        if ((controller.countSuppliers() > 0) && (controller.countBrands() > 0)) {
+            return true;
+        } 
+        
+        return false;
+    }
 }

@@ -57,6 +57,10 @@ public class PersistenceController {
         return supplierJpa.findSupplierEntities();
     }
     
+    public int countSuppliers() {
+        return supplierJpa.getSupplierCount();
+    }
+    
     public void modifySupplier(Supplier supplier) throws Exception {
         supplierJpa.edit(supplier);
     }
@@ -83,6 +87,10 @@ public class PersistenceController {
         return categoryJpa.findCategoryEntities();
     }
     
+    public int countCategories() {
+        return categoryJpa.getCategoryCount();
+    }
+    
     /***** BRAND *****/
     
     public void addBrand(Brand newBrand) throws Exception {
@@ -99,6 +107,10 @@ public class PersistenceController {
     
     public List<Brand> getBrands() {
         return brandJpa.findBrandEntities();
+    }
+    
+    public int countBrands() {
+        return brandJpa.getBrandCount();
     }
     
     public void modifyBrand(Brand brand) throws Exception {
