@@ -256,16 +256,16 @@ public class ModifyProduct extends javax.swing.JFrame {
 
     private void btnEditProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditProductActionPerformed
         String name = txtProductName.getText();
-        String model = txtProductModel.getText();
-        int stock = Integer.parseInt(txtProductStock.getText());
+        String model = txtProductModel.getText().isEmpty() ? "-" : txtProductModel.getText();
+        int stock = txtProductStock.getText().isEmpty() ? 0 : Integer.parseInt(txtProductStock.getText());
         float price = Float.parseFloat(txtProductPrice.getText());
-        String descrip = txtProductDescription.getText();
+        String descrip = txtProductDescription.getText().isEmpty() ? "-" : txtProductDescription.getText();
         
         ArrayList<Supplier> suppliers = getSuppliersList();
         Brand brand = getSelectedBrand();
         Category category = getSelectedCategory();
         
-        if (areFieldsValid(name, price, stock, brand, suppliers, category)) {
+        if (areFieldsValid(name, price, brand, suppliers, category)) {
             controller.modifyProduct(this.product, name, model, stock, price, suppliers, brand, descrip, category);
             Notification.showMessage("Producto modificado correctamente", "Info", "Modificacion exitosa");
             this.dispose();
@@ -420,8 +420,8 @@ public class ModifyProduct extends javax.swing.JFrame {
         }
     }
     
-    private boolean areFieldsValid(String name, float price, int stock, Brand brand, ArrayList<Supplier> suppliers, Category category) {
-        if ((name == "") || (price == 0) || (stock == 0) || (brand == null) || (category == null) || (suppliers.size() == 0)) {
+    private boolean areFieldsValid(String name, float price, Brand brand, ArrayList<Supplier> suppliers, Category category) {
+        if ((name == "") || (price == 0) || (brand == null) || (category == null) || (suppliers.size() == 0)) {
             return false;
         }
         

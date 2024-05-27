@@ -278,10 +278,10 @@ public class AddProduct extends javax.swing.JFrame {
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
         try {
             String name = txtProductName.getText();
-            String model = txtProductModel.getText();
+            String model = txtProductModel.getText().isEmpty() ? "-" : txtProductModel.getText();
             int stock = txtProductStock.getText().isEmpty() ? 0 : Integer.parseInt(txtProductStock.getText());
             float price = Float.parseFloat(txtProductPrice.getText());
-            String descrip = txtProductDescription.getText();
+            String descrip = txtProductDescription.getText().isEmpty() ? "-" : txtProductDescription.getText();
             
             ArrayList<Supplier> suppliers = getSuppliersList();
             Brand brand = getSelectedBrand();

@@ -130,14 +130,14 @@ public class AddSupplier extends javax.swing.JFrame {
 
     private void btnAddSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSupplierActionPerformed
         String name = txtSupplierName.getText();
-        String phone = txtSupplierPhone.getText();
-        if ((name != "") && (phone != "")) {
+        String phone = txtSupplierPhone.getText().isEmpty() ? "-" : txtSupplierPhone.getText();
+        if (name != "") {
             controller.addSupplier(name, phone);
             Notification.showMessage("Proveedor agregado exitosamente", "Succeed", "Agregado exitoso");
             this.dispose();
             new SuppliersMenu().setVisible(true);   
         } else {
-            Notification.showMessage("No se pudo agregar el proveedor, campos incompletos", "Error", "Agregado fallido");
+            Notification.showMessage("No se pudo agregar el proveedor, nombre incompleto", "Error", "Agregado fallido");
         }
     }//GEN-LAST:event_btnAddSupplierActionPerformed
 

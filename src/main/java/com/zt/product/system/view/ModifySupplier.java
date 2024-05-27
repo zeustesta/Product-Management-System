@@ -128,14 +128,14 @@ public class ModifySupplier extends javax.swing.JFrame {
 
     private void btnEditSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditSupplierActionPerformed
         String name = txtSupplierName.getText();
-        String phone = txtSupplierPhone.getText();
-        if ((name != "") && (phone != "")) {
+        String phone = txtSupplierPhone.getText().isEmpty() ? "-" : txtSupplierPhone.getText();
+        if (name != "") {
             controller.modifySupplier(supplier, name, phone);
             Notification.showMessage("Proveedor modificado exitosamente", "Info", "Modificacion exitosa");
             this.dispose();
             new SuppliersMenu().setVisible(true);
         } else {
-            Notification.showMessage("No se pudo modificar el proveedor, campos incompletos", "Error", "Modificacion fallida");
+            Notification.showMessage("No se pudo modificar el proveedor, nombre incompleto", "Error", "Modificacion fallida");
         }
     }//GEN-LAST:event_btnEditSupplierActionPerformed
 
