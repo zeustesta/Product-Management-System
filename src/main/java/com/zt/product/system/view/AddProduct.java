@@ -279,7 +279,7 @@ public class AddProduct extends javax.swing.JFrame {
         try {
             String name = txtProductName.getText();
             String model = txtProductModel.getText();
-            int stock = Integer.parseInt(txtProductStock.getText());
+            int stock = txtProductStock.getText().isEmpty() ? 0 : Integer.parseInt(txtProductStock.getText());
             float price = Float.parseFloat(txtProductPrice.getText());
             String descrip = txtProductDescription.getText();
             

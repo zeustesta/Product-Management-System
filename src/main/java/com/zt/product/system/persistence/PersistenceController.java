@@ -45,6 +45,10 @@ public class PersistenceController {
         supplierJpa.create(newSupplier);
     }
     
+    public boolean isSupplierInUse(int supplierId) {
+        return supplierJpa.isSupplierInUse(supplierId);
+    }
+    
     public Supplier getSupplier(int supplierId) {
         return supplierJpa.findSupplier(supplierId);
     }
@@ -95,6 +99,10 @@ public class PersistenceController {
     
     public void addBrand(Brand newBrand) throws Exception {
         brandJpa.create(newBrand);
+    }
+    
+    public boolean isBrandInUse(int brandId) {
+        return brandJpa.isBrandInUse(brandId);
     }
     
     public Brand getBrand(int brandId) {

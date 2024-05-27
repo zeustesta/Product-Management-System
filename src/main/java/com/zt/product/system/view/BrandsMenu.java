@@ -245,10 +245,13 @@ public class BrandsMenu extends javax.swing.JFrame {
         if (tblBrands.getRowCount() > 0) {
             if (tblBrands.getSelectedRow() != -1) {
                 int brandId = Integer.parseInt(String.valueOf(tblBrands.getValueAt(tblBrands.getSelectedRow(), 0)));
-                
-                controller.deleteBrand(brandId);
-                Notification.showMessage("Marca borrada correctamente", "Info", "Borrado exitoso");
-                populateTable();
+                if (!controller.isBrandInUse(brandId)) {
+                    controller.deleteBrand(brandId);
+                    Notification.showMessage("Marca borrada correctamente", "Info", "Borrado exitoso");
+                    populateTable();
+                } else {
+                    Notification.showMessage("La marca esta siendo utilizada", "Error", "Borrado fallido");
+                }
             } else {
                 Notification.showMessage("Se debe seleccionar una fila para poder borrar", "Error", "Borrado fallido");
             }

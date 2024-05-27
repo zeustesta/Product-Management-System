@@ -86,6 +86,10 @@ public class MainController {
         }
     }  
     
+    public boolean isSupplierInUse(int supplierId) {
+        return persController.isSupplierInUse(supplierId);
+    }
+    
     public Supplier getSupplier(int supplierId) {
         return persController.getSupplier(supplierId);
     }
@@ -163,6 +167,10 @@ public class MainController {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+    
+    public boolean isBrandInUse(int brandId) {
+        return persController.isBrandInUse(brandId);
     }
     
     public Brand getBrand(int brandId) {

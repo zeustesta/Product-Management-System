@@ -131,7 +131,6 @@ public class ProductJpaController implements Serializable{
         }
     }
     
-    
     public void modifyPrices(String operation, String type, String typeSelection, int percent) {
         EntityManager em = getEntityManager();
         EntityTransaction transaction = em.getTransaction();

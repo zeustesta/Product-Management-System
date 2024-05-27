@@ -223,10 +223,13 @@ public class SuppliersMenu extends javax.swing.JFrame {
         if (tblSuppliers.getRowCount() > 0) {
             if (tblSuppliers.getSelectedRow() != -1) {
                 int supplierId = Integer.parseInt(String.valueOf(tblSuppliers.getValueAt(tblSuppliers.getSelectedRow(), 0)));
-
-                controller.deleteSupplier(supplierId);
-                Notification.showMessage("Proveedor borrado correctamente", "Info", "Borrado exitoso");
-                populateTable();
+                if (!controller.isSupplierInUse(supplierId)) {
+                    controller.deleteSupplier(supplierId);
+                    Notification.showMessage("Proveedor borrado correctamente", "Info", "Borrado exitoso");
+                    populateTable();   
+                } else {
+                    Notification.showMessage("El proveedor esta siendo utilizado", "Error", "Borrado fallido");
+                }
             } else {
                 Notification.showMessage("Se debe seleccionar una fila para poder borrar", "Error", "Borrado fallido");
             }
@@ -241,7 +244,7 @@ public class SuppliersMenu extends javax.swing.JFrame {
                 int supplierId = Integer.parseInt(String.valueOf(tblSuppliers.getValueAt(tblSuppliers.getSelectedRow(), 0)));
 
                 this.dispose();
-                new ModifyBrand(supplierId).setVisible(true);
+                new ModifySupplier(supplierId).setVisible(true);
             } else {
                 Notification.showMessage("Se debe seleccionar una fila para poder modificar", "Error", "Edicion fallida");
             }

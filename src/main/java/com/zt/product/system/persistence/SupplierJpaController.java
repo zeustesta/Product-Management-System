@@ -1,12 +1,16 @@
 package com.zt.product.system.persistence;
 
+import com.zt.product.system.model.Product;
 import com.zt.product.system.model.Supplier;
 import com.zt.product.system.persistence.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 
 import javax.persistence.*;
 import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 public class SupplierJpaController implements Serializable{
@@ -149,6 +153,26 @@ public class SupplierJpaController implements Serializable{
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
+        }
+    }
+    
+    public boolean isSupplierInUse(int supplierId) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+            Root<Product> productRoot = cq.from(Product.class);
+            //Join<Product, Supplier> supplierJoin = productRoot.join("Supplier");
+            
+            Predicate supplierPredicate = cb.isMember(supplierId, productRoot.get("suppliers").get("supplierId"));
+            cq.select(cb.count(productRoot)).where(supplierPredicate);
+            
+            Long result = em.createQuery(cq).getSingleResult();
+            
+            return result > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
         }
     }
 }

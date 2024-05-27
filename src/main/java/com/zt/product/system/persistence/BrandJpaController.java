@@ -1,6 +1,7 @@
 package com.zt.product.system.persistence;
 
 import com.zt.product.system.model.Brand;
+import com.zt.product.system.model.Product;
 import com.zt.product.system.persistence.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -10,7 +11,9 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 public class BrandJpaController implements Serializable {
@@ -153,6 +156,25 @@ public class BrandJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
+        }
+    }
+    
+    public boolean isBrandInUse(int brandId) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+            Root<Product> productRoot = cq.from(Product.class);
+            
+            Predicate brandPredicate = cb.equal(productRoot.get("brand").get("brandId"), brandId);
+            cq.select(cb.count(productRoot)).where(brandPredicate);
+            
+            Long result = em.createQuery(cq).getSingleResult();
+            
+            return result > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
         }
     }
 }
